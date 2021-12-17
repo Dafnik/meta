@@ -1,5 +1,5 @@
 ```bash
-dnf install chromium-browser-privacy
+flatpak install flathub com.github.Eloston.UngoogledChromium
 ```
 
 ```bash
@@ -7,5 +7,5 @@ nano ~/.bashrc
 ```
 
 ```bash
-export CHROME_BIN=/usr/bin/chromium-browser-privacy
+export CHROME_BIN=/var/lib/flatpak/app/com.github.Eloston.UngoogledChromium/current/active/files/chromium/chrome
 ```
