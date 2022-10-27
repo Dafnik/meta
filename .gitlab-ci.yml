@@ -7,7 +7,7 @@ deploy:
   stage: deploy
   environment: Staging
   only:
-    - master
+    - main
   script:
     - mkdocs build
     - eval "$(ssh-agent -s)"
