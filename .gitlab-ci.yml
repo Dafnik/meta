@@ -1,4 +1,15 @@
-image: minidocks/mkdocs
+image: python:buster
+
+cache:
+  paths:
+    - .cache/pip
+
+before_script:
+  - apt install -y -qq openssh-client
+  - pip install mkdocs
+  - pip install mkdocs-material
+  - pip install mkdocs-minify-plugin
+  - pip install mkdocs-git-revision-date-localized-plugin
 
 deploy:
   stage: deploy
