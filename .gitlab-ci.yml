@@ -1,0 +1,17 @@
+image: minidocks/mkdocs
+
+before_script:
+  - apk add openssh
+
+deploy:
+  stage: deploy
+  environment: Staging
+  only:
+    - master
+  script:
+    - mkdocs build
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR $SSH_USERNAME@$SSH_HOST -p $SSH_PORT "rm -rf /var/www/meta/*"
+    - scp -r -o StrictHostKeyChecking=no -o LogLevel=ERROR -P $SSH_PORT ./site/*  $SSH_USERNAME@$SSH_HOST:/var/www/meta/
