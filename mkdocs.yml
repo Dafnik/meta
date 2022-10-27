@@ -1,0 +1,32 @@
+site_name: meta - dafnik.me
+site_url: https://meta.dafnik.me
+site_author: Dafnik
+
+repo_name: dafnik/meta
+repo_url: https://gitlab.com/dafnik/meta
+
+dev_addr: '127.0.0.1:8080'
+
+theme:
+  favicon: img/favicon.png
+  name: 'material'
+  palette:
+    scheme: 'slate'
+    primary: 'blue grey'
+    accent: 'amber'
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: datetime
+
+markdown_extensions:
+  - codehilite
+  - admonition
+
+nav:
+    - Home: index.md
+    - Scripts: scripts/index.md
+    - Fixes: fixes/index.md
