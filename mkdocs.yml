@@ -28,5 +28,10 @@ markdown_extensions:
 
 nav:
     - Home: index.md
-    - Scripts: scripts/index.md
-    - Fixes: fixes/index.md
+    - Scripts:
+        - Certbot get certificate: scripts/certbot-get-certificate-with-nginx-hooks.md
+        - Git file mode changes: scripts/disable-git-file-mode-changes.md
+        - Mirror online directory: scripts/mirror-online-dir.md
+    - Fixes:
+        - Export chrome bin: fixes/export-chrome-bin.md
+        - GitKraken pre commit fix: fixes/kraken-pre-commit-hook-fails.md
