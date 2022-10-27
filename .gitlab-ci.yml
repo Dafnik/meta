@@ -1,8 +1,5 @@
 image: minidocks/mkdocs
 
-before_script:
-  - apk add openssh
-
 deploy:
   stage: deploy
   environment: Staging
