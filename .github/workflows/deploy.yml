@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Build
-        uses: jnanadarshan/mkdocs-build-action@v1
+
+      - name: Build MkDocs
+        uses: moonpathbg/mkdocs_builder@latest
+
       - name: remove old files
         uses: appleboy/ssh-action@master
         with:
