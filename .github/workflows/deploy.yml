@@ -11,8 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Build MkDocs
-        uses: moonpathbg/mkdocs_builder@latest
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
+      - run: mkdocs build
 
       - name: remove old files
         uses: appleboy/ssh-action@master
