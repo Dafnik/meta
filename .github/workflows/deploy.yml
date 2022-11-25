@@ -17,6 +17,7 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
+      - run: pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
       - run: mkdocs build
 
       - name: remove old files
