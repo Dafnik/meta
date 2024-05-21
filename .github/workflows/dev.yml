@@ -1,0 +1,60 @@
+name: Preview
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - run: pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
+
+      - run: mkdocs build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build
+          path: ./site/
+
+  # Deploy job
+  deploy:
+    name: Deploy preview
+    needs: build
+
+    permissions:
+      pull-requests: write
+      actions: read
+
+    # Deploy to the preview environment
+    environment:
+      name: preview-${{ github.event.number }}
+      url: ${{ steps.deploy-preview.outputs.url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Build
+          path: ./site
+
+      - name: deploy preview
+        id: deploy-preview
+        uses: dafnik/ssp@v1
+        with:
+          host: preview.dafnik.me
+          username: ${{ secrets.PREVIEW_SSH_USER }}
+          key: ${{ secrets.PREVIEW_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PREVIEW_SSH_PORT }}
+          source: site/*
+          target: /var/www/preview
+          strip_components: 1
