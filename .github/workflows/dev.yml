@@ -21,7 +21,7 @@ jobs:
       - run: mkdocs build
 
       - name: Upload Pages artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Build
           path: ./site/
@@ -42,7 +42,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: Build
           path: ./site
